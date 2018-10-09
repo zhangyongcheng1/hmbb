@@ -2,6 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import index from './components/index.vue'
 
+//引用elment插件
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
 // 引入vue-router
 import vueRouter from 'vue-router'
 //use一下
