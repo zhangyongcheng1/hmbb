@@ -56,7 +56,7 @@
                                     <dl>
                                         <dd>
                                             <div id="buyButton" class="btn-buy">
-                                                <button onclick="cartAdd(this,'/',1,'/shopping.html');" class="buy">立即购买</button>
+                                                <button  @click="jump"  class="buy">立即购买</button>
                                                 <button @click="addcar" class="add">加入购物车</button>
                                             </div>
                                         </dd>
@@ -295,11 +295,18 @@ export default {
           this.getComments();
         });
     },
-    //商品数量添加到购物车
+    //商品数量添加到购物车i
     addcar(){
         this.$store.commit('addshop',{
             id:this.goodId,
             count:this.num
+        })
+    },
+    //点击立即购买跳转到购物车页面
+    jump(){
+        this.addcar();
+        this.$router.push({
+            path:"/shopCart"
         })
     }
   },

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import index from './components/index.vue'
 import detail from './components/detail.vue'
+import shopCart from './components/shopCart.vue'
 //动态效果
 import './assets/statics/cavars.js'
 
@@ -44,7 +45,7 @@ Vue.use(Vuex)
 //实例化vuex数据仓库
 const store = new Vuex.Store({
   state: {
-    addshopData:JSON.parse(localStorage.getItem(history))||{}
+    addshopData: JSON.parse(localStorage.getItem(history)) || {}
   },
   mutations: {
     //   increment (state) {
@@ -60,17 +61,27 @@ const store = new Vuex.Store({
         state.addshopData[shapcarData.id] += shapcarData.count;
       }
 
-    }
+    },
+    //购物车中修改购物车商品数量
+    newaddshop(state, shapcarData) {
+      state.addshopData[shapcarData.id] = shapcarData.newNum;
+      // Vue.set(state.addshopData, shapcarData.id, shapcarData.newNum);
+    },
+    //删除选中的商品
+    // deleteGood(state, id) {
+    //   // delete state.addshopData[id];
+    //   Vue.delete(state.addshopData,id)
+    // }
   },
   getters: {
     shopcarCount(state) {
-      let getter=0;
+      let getter = 0;
       for (const key in state.addshopData) {
-       getter+=state.addshopData[key]
-        }
-      return getter
+        getter += state.addshopData[key]
       }
+      return getter
     }
+  }
 
 })
 
@@ -101,6 +112,11 @@ const routes = [{
   {
     path: '/detail/:goodID',
     component: detail
+  },
+  //购物车
+  {
+    path: '/shopCart',
+    component: shopCart
   }
 ]
 //创建路由实例
@@ -108,6 +124,7 @@ const router = new vueRouter({
   routes
 })
 Vue.config.productionTip = false
+
 
 new Vue({
   render: h => h(App),
@@ -117,6 +134,6 @@ new Vue({
 }).$mount('#app')
 
 //当浏览器关闭时保存购物车数据到localstorage
-window.onbeforeunload=function(){
-  localStorage.setItem('history',JSON.stringify(store.state.addshopData))
+window.onbeforeunload = function () {
+  localStorage.setItem('history', JSON.stringify(store.state.addshopData))
 }
