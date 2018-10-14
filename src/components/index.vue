@@ -8,6 +8,7 @@
             </div>
         </div>
         <div class="section">
+
             <div class="wrapper">
                 <div class="wrap-box">
                     <div class="left-220" style="margin: 0px;">
@@ -61,7 +62,7 @@
                                 </div>
                                 <div class="txt-box">
                                     <a href="/goods/show-98.html">{{item.title}}</a>
-                                    <span>{{item.add_time | capitalize}}</span>
+                                    <span>{{item.add_time | capitalize('年','月','日','')}}</span>
                                 </div>
                             </li>
                         </ul>
@@ -109,7 +110,7 @@
     </div>
 </template>
 <script>
-import moment from "moment";
+// import moment from "moment";
 // import axios from "axios";
 export default {
   name: "index",
@@ -121,13 +122,13 @@ export default {
       orderlist: [],
     };
   },
-  //过滤器
-  filters: {
-    capitalize(value) {
-      // console.log(value)
-      return moment(value).format("YYYY年MM月DD日");
-    }
-  },
+  //过滤器,迁移到全局
+//   filters: {
+//     capitalize(value) {
+//       // console.log(value)
+//       return moment(value).format("YYYY年MM月DD日");
+//     }
+//   },
   created() {
     this.$axios.get("/site/goods/gettopdata/goods").then(response => {
       // console.log(response);

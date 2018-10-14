@@ -26,7 +26,7 @@
                     <a href="" class="">
                         <i class="iconfont icon-cart"></i>购物车(
                         <span id="shoppingCartCount">
-                            <span>4</span>
+                            <span>{{$store.getters.shopcarCount}}</span>
                         </span>)</a>
                 </div>
             </div>
@@ -86,7 +86,7 @@
     <router-view></router-view>
     <!-- 尾部 -->
     <div class="footer">
-                <div class="section">
+        <div class="section">
                     <div class="foot-nav">
                         <a href="">关于我们</a>
                         <strong>|</strong>
@@ -114,13 +114,17 @@
                                 <i class="iconfont icon-phone"></i>在线客服</a>
                         </div>
                     </div>
-                </div>
-            </div>
+        </div>
+    </div>
+    <!-- 返回顶部 -->
+    <BackTop :height="100" :bottom="50">
+        <div class="top">🚀</div>
+    </BackTop>
   </div>
 </template>
 
 <script>
-import $ from "jquery" 
+import $ from "jquery";
 export default {
   name: "app",
   mounted() {
@@ -147,13 +151,28 @@ export default {
           .animate({ top: "-48px" }, 300); // move up - hide
       }
     );
+  },
+  methods: {
+    //   add(){
+    //       this.$store.commit('increment')
+    //   }
   }
 };
 </script>
 
 <style>
 @import url("./assets/statics/site/css/style.css");
-.menuhd ul li a span.over{
-    background-color: greenyellow;
+.menuhd ul li a span.over {
+  background-color: greenyellow;
+}
+
+.top {
+  padding: 10px;
+  background: rgba(0, 153, 229, 0.7);
+  color: #fff;
+  font-size: 24px;
+  transform: rotate(-45deg);
+  text-align: center;
+  border-radius: 50%;
 }
 </style>
